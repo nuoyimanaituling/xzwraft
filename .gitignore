@@ -22,6 +22,6 @@ hs_err_pid*
 /target
 /xzwraft/xzwraft-core/target
 /xzwraft/xzwraft-kvstore/target
-/xzwraft/xzwRaft.iml
+/xzwraft/xzwraft.iml
 /xzwraft/.idea
 
