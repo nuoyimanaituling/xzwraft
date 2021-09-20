@@ -12,17 +12,13 @@ public class FollowerNodeRole extends AbstractNodeRole {
 
     private final NodeId votedFor;
     private final NodeId leaderId;
-//    private final int preVotesCount;
     private final ElectionTimeout electionTimeout;
-//    private final long lastHeartbeat;
 
     public FollowerNodeRole(int term, NodeId votedFor, NodeId leaderId, int preVotesCount, long lastHeartbeat, ElectionTimeout electionTimeout) {
         super(RoleName.FOLLOWER, term);
         this.votedFor = votedFor;
         this.leaderId = leaderId;
-//        this.preVotesCount = preVotesCount;
         this.electionTimeout = electionTimeout;
-//        this.lastHeartbeat = lastHeartbeat;
     }
 
     public FollowerNodeRole(int term, NodeId votedFor, NodeId leaderId, ElectionTimeout electionTimeout) {
@@ -48,13 +44,7 @@ public class FollowerNodeRole extends AbstractNodeRole {
         return leaderId;
     }
 
-//    public int getPreVotesCount() {
-//        return preVotesCount;
-//    }
 
-//    public long getLastHeartbeat() {
-//        return lastHeartbeat;
-//    }
 
     @Override
     public NodeId getLeaderId(NodeId selfId) {
@@ -66,19 +56,7 @@ public class FollowerNodeRole extends AbstractNodeRole {
         electionTimeout.cancel();
     }
 
-//    @Override
-//    public RoleState getState() {
-//        DefaultRoleState state = new DefaultRoleState(RoleName.FOLLOWER, term);
-//        state.setVotedFor(votedFor);
-//        state.setLeaderId(leaderId);
-//        return state;
-//    }
 
-//    @Override
-//    protected boolean doStateEquals(AbstractNodeRole role) {
-//        in.xnnyygn.xraft.core.node.role.FollowerNodeRole that = (in.xnnyygn.xraft.core.node.role.FollowerNodeRole) role;
-//        return Objects.equals(this.votedFor, that.votedFor) && Objects.equals(this.leaderId, that.leaderId);
-//    }
 
     @Override
     public String toString() {

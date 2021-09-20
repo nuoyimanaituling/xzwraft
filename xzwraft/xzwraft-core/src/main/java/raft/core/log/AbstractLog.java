@@ -9,6 +9,11 @@ import raft.core.log.entry.EntryMeta;
 import raft.core.log.entry.GeneralEntry;
 import raft.core.log.entry.NoOpEntry;
 import raft.core.log.sequence.EntrySequence;
+import raft.core.log.statemachine.AbstractSingleThreadStateMachine;
+import raft.core.log.statemachine.EmptyStateMachine;
+import raft.core.log.statemachine.StateMachine;
+import raft.core.log.statemachine.StateMachineContext;
+import raft.core.node.NodeEndpoint;
 import raft.core.node.NodeId;
 import raft.core.rpc.message.AppendEntriesRpc;
 
@@ -22,13 +27,17 @@ abstract class AbstractLog implements Log {
 
     protected final EventBus eventBus;
     protected EntrySequence entrySequence;
+    protected StateMachine stateMachine = new EmptyStateMachine();
     protected int commitIndex = 0;
-
+    private StateMachineContext stateMachineContext;
     AbstractLog(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
 
+    void setStateMachineContext(StateMachineContext stateMachineContext) {
+        this.stateMachineContext = stateMachineContext;
+    }
 
     @Override
     @Nonnull
@@ -93,16 +102,18 @@ abstract class AbstractLog implements Log {
     public GeneralEntry appendEntry(int term, byte[] command) {
         GeneralEntry entry = new GeneralEntry(entrySequence.getNextLogIndex(), term, command);
         entrySequence.append(entry);
+        stateMachine.applyLog(null,entry.getIndex(),entry.getCommandBytes(),0);
         return entry;
     }
 
     @Override
     public boolean appendEntriesFromLeader(int prevLogIndex, int prevLogTerm, List<Entry> leaderEntries) {
         // check previous log 检查前一条日志是否匹配
-        //// 先检查从leader节点过来的prevLogIndex呵呵prevLogTerm是否匹配本地日志，如果不匹配则返回false，则追加失败
-        if (!checkIfPreviousLogMatches(prevLogIndex, prevLogTerm)) {
-            return false;
-        }
+        //// 先检查从leader节点过来的prevLogIndex和prevLogTerm是否匹配本地日志，如果不匹配则返回false，则追加失败
+        // todo：这是一个bug，如果初始日志为空的话，那么这个结果一直返回false
+//        if (!checkIfPreviousLogMatches(prevLogIndex, prevLogTerm)) {
+//            return false;
+//        }
         // heartbeat no-0p
         if (leaderEntries.isEmpty()) {
             return true;
@@ -123,7 +134,11 @@ abstract class AbstractLog implements Log {
         for (Entry leaderEntry : leaderEntries) {
             entrySequence.append(leaderEntry);
         }
+
+
     }
+
+
 
 
     private EntrySequenceView removeUnmatchedLog(EntrySequenceView leaderEntries) {
@@ -170,7 +185,7 @@ abstract class AbstractLog implements Log {
         }
         int term = meta.getTerm();
         if (term != prevLogTerm){
-            logger.debug("different term of previous log local{} ,remote{} ",term ,prevLogTerm);
+            logger.debug("different term of previous log local{} ,remote{}",term ,prevLogTerm);
             return false;
         }
         return true;
@@ -180,10 +195,19 @@ abstract class AbstractLog implements Log {
         if (entrySequence.isEmpty() || index >= entrySequence.getLastLogIndex()) {
             return;
         }
+        entrySequence.subList(entrySequence.getFirstLogIndex(), index + 1).forEach(this::applyEntry);
         logger.debug("remove entries after {}", index);
         entrySequence.removeAfter(index);
 
     }
+
+    private void applyEntry(Entry entry) {
+        // skip no-op entry and membership-change entry
+        if (isApplicable(entry)) {
+            stateMachine.applyLog(stateMachineContext, entry.getIndex(), entry.getCommandBytes(), entrySequence.getFirstLogIndex());
+        }
+    }
+
 
     @Override
     public void advanceCommitIndex(int newCommitIndex, int currentTerm) {
@@ -218,9 +242,6 @@ abstract class AbstractLog implements Log {
         }
         return true;
     }
-
-
-
 
 
     @Override

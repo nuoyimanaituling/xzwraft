@@ -1,10 +1,8 @@
 package raft.core.log.sequence;
-
 import raft.core.log.entry.Entry;
 import raft.core.log.entry.EntryFactory;
 import raft.core.support.RandomAccessFileAdapter;
 import raft.core.support.SeekableFile;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,6 +37,7 @@ public class EntriesFile {
         if (offset > seekableFile.size()) {
             throw new IllegalArgumentException("offset > size");
         }
+        // 根据offset定位到文件具体位置
         seekableFile.seek(offset);
         int kind = seekableFile.readInt();
         int index = seekableFile.readInt();

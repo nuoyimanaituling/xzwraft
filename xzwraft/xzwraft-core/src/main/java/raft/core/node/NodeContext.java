@@ -6,8 +6,6 @@ import raft.core.node.store.NodeStore;
 import raft.core.rpc.Connector;
 import raft.core.schedule.Scheduler;
 import raft.core.support.TaskExecutor;
-
-
 /**
  * Node context.
  * <p>
@@ -15,7 +13,6 @@ import raft.core.support.TaskExecutor;
  * </p>
  */
 public class NodeContext {
-
     /**
      * 当前节点id
      */
@@ -24,9 +21,10 @@ public class NodeContext {
      * 成员列表
      */
     private NodeGroup group;
+
     private Log log;
     /**
-     * Ppc组件
+     * Rpc组件
      */
     private Connector connector;
     /**
@@ -37,8 +35,8 @@ public class NodeContext {
      * 定时器组件
      */
     private Scheduler scheduler;
-//    private NodeMode mode;
-//    private NodeConfig config;
+
+
     private EventBus eventBus;
     /**
      * 主线程执行器

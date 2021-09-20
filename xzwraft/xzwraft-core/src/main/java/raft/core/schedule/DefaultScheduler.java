@@ -29,10 +29,6 @@ public class DefaultScheduler implements Scheduler {
     private final Random electionTimeoutRandom;
     private final ScheduledExecutorService scheduledExecutorService;
 
-//    public DefaultScheduler(NodeConfig config) {
-//        this(config.getMinElectionTimeout(), config.getMaxElectionTimeout(), config.getLogReplicationDelay(),
-//                config.getLogReplicationInterval());
-//    }
 
     public DefaultScheduler(int minElectionTimeout, int maxElectionTimeout, int logReplicationDelay, int logReplicationInterval) {
         if (minElectionTimeout <= 0 || maxElectionTimeout <= 0 || minElectionTimeout > maxElectionTimeout) {
@@ -54,6 +50,7 @@ public class DefaultScheduler implements Scheduler {
     public LogReplicationTask scheduleLogReplicationTask(@Nonnull Runnable task) {
         Preconditions.checkNotNull(task);
         logger.debug("schedule log replication task");
+        // 初始复制延迟
         ScheduledFuture<?> scheduledFuture = this.scheduledExecutorService.scheduleWithFixedDelay(
                 task, logReplicationDelay, logReplicationInterval, TimeUnit.MILLISECONDS);
         return new LogReplicationTask(scheduledFuture);

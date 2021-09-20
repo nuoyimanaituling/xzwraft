@@ -2,7 +2,6 @@ package raft.core.log.sequence;
 
 import raft.core.log.entry.Entry;
 import raft.core.log.entry.EntryMeta;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  * 具体的范围增加，查询，删除都是由子类去实现的
  */
 abstract class AbstractEntrySequence implements EntrySequence {
-
 
     /**
      * 日志索引偏移
@@ -25,7 +23,6 @@ abstract class AbstractEntrySequence implements EntrySequence {
         this.logIndexOffset = logIndexOffset;
         this.nextLogIndex = logIndexOffset;
     }
-
     /**
      * 当日志索引偏移与下一条日志的索引相等，则代表当前日志条目序列为空
      * @return

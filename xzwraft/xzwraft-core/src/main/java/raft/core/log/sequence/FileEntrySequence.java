@@ -1,20 +1,16 @@
 package raft.core.log.sequence;
 
-
-
 import raft.core.log.LogDir;
 import raft.core.log.LogException;
 import raft.core.log.entry.Entry;
 import raft.core.log.entry.EntryFactory;
 import raft.core.log.entry.EntryMeta;
-
 import javax.annotation.concurrent.NotThreadSafe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 @NotThreadSafe
 public class FileEntrySequence extends AbstractEntrySequence {
 
@@ -37,7 +33,7 @@ public class FileEntrySequence extends AbstractEntrySequence {
     }
     // 构造函数，指定文件
     public FileEntrySequence(EntriesFile entriesFile, EntryIndexFile entryIndexFile, int logIndexOffset) {
-        // 默认logIndexOffset由外部决定
+        // 默认logIndexOffset由外部决定 格式比如log-1
         super(logIndexOffset);
         this.entriesFile = entriesFile;
         this.entryIndexFile = entryIndexFile;
@@ -49,11 +45,11 @@ public class FileEntrySequence extends AbstractEntrySequence {
             commitIndex = logIndexOffset - 1;
             return;
         }
-        // 使用日志索引文件的minEntryIndex作为logIndexOffset
+        // 使用日志索引文件的minEntryIndex作为logIndexOffset，logIndexOffset是文件缓存起始的Entry
         logIndexOffset = entryIndexFile.getMinEntryIndex();
         // 使用日志索引文件的maxEntryIndex加1作为nextLogOffset
         nextLogIndex = entryIndexFile.getMaxEntryIndex() + 1;
-        //commitIndex为MaxEntryIndex
+        // commitIndex为MaxEntryIndex
         commitIndex = entryIndexFile.getMaxEntryIndex();
     }
 
@@ -96,12 +92,14 @@ public class FileEntrySequence extends AbstractEntrySequence {
 
     @Override
     protected Entry doGetEntry(int index) {
+        // 首先从缓存中获取
         if (!pendingEntries.isEmpty()) {
             int firstPendingEntryIndex = pendingEntries.getFirst().getIndex();
             if (index >= firstPendingEntryIndex) {
                 return pendingEntries.get(index - firstPendingEntryIndex);
             }
         }
+
         // pending entries not empty but index < firstPendingEntryIndex => entry in file
         // pending entries empty => entry in file
         assert !entryIndexFile.isEmpty();
@@ -158,6 +156,7 @@ public class FileEntrySequence extends AbstractEntrySequence {
         }
         long offset;
         Entry entry = null;
+        // 落盘并更新commitIndex
         try {
             for (int i = commitIndex + 1; i <= index; i++) {
                 entry = pendingEntries.removeFirst();

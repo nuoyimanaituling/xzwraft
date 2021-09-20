@@ -37,7 +37,7 @@ public class OutboundChannelGroup {
 
     /**
      * 实现了一个线程安全的惰性连接方法，getChannel方法根据EndPoint查找可用的连接
-     * 如果找不到就新建一个连接。这是一个惰性连接方法
+     * 如果找不到就新建一个连接。这是一个惰性连接方法。放到channelmap当中
      * @param nodeId
      * @param address
      * @return
@@ -66,8 +66,6 @@ public class OutboundChannelGroup {
             throw new ChannelException("failed to get channel to node " + nodeId, e);
         }
     }
-
-
     /**
      * 连接远程节点
      * @param nodeId

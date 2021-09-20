@@ -129,15 +129,15 @@ public class NioConnector implements Connector {
         executorService.execute(() -> getChannel(destinationEndpoint).writeAppendEntriesRpc(rpc));
     }
 
-    @Override
-    public void replyAppendEntries(@Nonnull AppendEntriesResult result, @Nonnull NodeEndpoint destinationEndpoint) {
-
-    }
-
-    @Override
-    public void replyRequestVote(@Nonnull RequestVoteResult result, @Nonnull NodeEndpoint destinationEndpoint) {
-
-    }
+//    @Override
+//    public void replyAppendEntries(@Nonnull AppendEntriesResult result, @Nonnull NodeEndpoint destinationEndpoint) {
+//
+//    }
+//
+//    @Override
+//    public void replyRequestVote(@Nonnull RequestVoteResult result, @Nonnull NodeEndpoint destinationEndpoint) {
+//
+//    }
 
     @Override
     public void replyAppendEntries(@Nonnull AppendEntriesResult result, @Nonnull AppendEntriesRpcMessage rpcMessage) {
@@ -157,7 +157,7 @@ public class NioConnector implements Connector {
     }
 
     private Channel getChannel(NodeEndpoint endpoint) {
-        // 按照节点id创建或者获取连接
+        // 按照节点id创建或者获取 连接 对端节点的channel
         return outboundChannelGroup.getOrConnect(endpoint.getId(), endpoint.getAddress());
     }
 

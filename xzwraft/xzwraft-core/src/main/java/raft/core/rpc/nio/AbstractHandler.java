@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import raft.core.node.NodeId;
 import raft.core.rpc.Channel;
 import raft.core.rpc.message.*;
-
 import java.util.Objects;
-
 /**
  * 是一个同时管理入口与出口的管理器
  */
@@ -34,7 +32,6 @@ abstract class AbstractHandler extends ChannelDuplexHandler {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         assert remoteId != null;
         assert channel != null;
-
         if (msg instanceof RequestVoteRpc) {
             RequestVoteRpc rpc = (RequestVoteRpc) msg;
             eventBus.post(new RequestVoteRpcMessage(rpc, remoteId, channel));

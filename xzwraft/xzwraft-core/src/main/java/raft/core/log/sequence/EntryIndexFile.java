@@ -123,6 +123,7 @@ public class EntryIndexFile implements Iterable<EntryIndexItem> {
             clear();
             return;
         }
+        // 重写maxEntry_Index
         seekableFile.seek(OFFSET_MAX_ENTRY_INDEX);
         seekableFile.writeInt(newMaxEntryIndex);
         seekableFile.truncate(getOffsetOfEntryIndexItem(newMaxEntryIndex + 1));

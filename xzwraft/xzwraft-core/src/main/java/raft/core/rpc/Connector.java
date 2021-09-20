@@ -48,7 +48,7 @@ public interface Connector {
     /**
      *回复RequestVote给单个节点
      */
-    void replyRequestVote(@Nonnull RequestVoteResult result, @Nonnull NodeEndpoint destinationEndpoint);
+//    void replyRequestVote(@Nonnull RequestVoteResult result, @Nonnull NodeEndpoint destinationEndpoint);
 
 
     /**
@@ -62,7 +62,7 @@ public interface Connector {
     /**
      * 回复appendEntries给单个节点
      */
-    void replyAppendEntries(@Nonnull AppendEntriesResult result, @Nonnull NodeEndpoint destinationEndpoint);
+//    void replyAppendEntries(@Nonnull AppendEntriesResult result, @Nonnull NodeEndpoint destinationEndpoint);
 
 
     /**

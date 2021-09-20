@@ -1,7 +1,5 @@
 package raft.core.rpc.nio;
 
-
-
 import raft.core.rpc.Channel;
 import raft.core.rpc.ChannelException;
 import raft.core.rpc.message.AppendEntriesResult;

@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 /**
  * Scheduler.
  */
-// TODO optimize
 public interface Scheduler {
 
     /**

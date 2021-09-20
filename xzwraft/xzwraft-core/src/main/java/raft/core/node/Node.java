@@ -1,6 +1,9 @@
 package raft.core.node;
 
 
+import raft.core.log.statemachine.StateMachine;
+import raft.core.node.role.RoleNameAndLeaderId;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -9,36 +12,7 @@ import javax.annotation.Nonnull;
 public interface Node {
     // node接口作为暴露给上层服务的接口
 
-    /**
-     * Register state machine to node.
-     * <p>State machine should be registered before node start, or it may not take effect.</p>
-     *
-     * @param stateMachine state machine
-     */
-//    void registerStateMachine(@Nonnull StateMachine stateMachine);
 
-    /**
-     * Get current role name and leader id.
-     * <p>
-     * Available results:
-     * </p>
-     * <ul>
-     * <li>FOLLOWER, current leader id</li>
-     * <li>CANDIDATE, <code>null</code></li>
-     * <li>LEADER, self id</li>
-     * </ul>
-     *
-     * @return role name and leader id
-     */
-//    @Nonnull
-//    RoleNameAndLeaderId getRoleNameAndLeaderId();
-
-    /**
-     * Add node role listener.
-     *
-     * @param listener listener
-     */
-//    void addNodeRoleListener(@Nonnull NodeRoleListener listener);
 
     /**
      * Start node.
@@ -49,33 +23,11 @@ public interface Node {
      * Append log.
      *
      * @param commandBytes command bytes
-     * @throws NotLeaderException if not leader
-     */
-//    void appendLog(@Nonnull byte[] commandBytes);
+     * @throws       */
+    void appendLog(@Nonnull byte[] commandBytes);
 
 //    void enqueueReadIndex(@Nonnull String requestId);
 
-    /**
-     * Add node.
-     *
-//     * @param endpoint new node endpoint
-     * @return task reference
-//     * @throws NotLeaderException if not leader
-     * @throws IllegalStateException if group config change concurrently
-     */
-//    @Nonnull
-//    GroupConfigChangeTaskReference addNode(@Nonnull NodeEndpoint endpoint);
-
-    /**
-     * Remove node.
-     *
-     * @param id id
-     * @return task reference
-     * @throws NotLeaderException if not leader
-     * @throws IllegalStateException if group config change concurrently
-     */
-//    @Nonnull
-//    GroupConfigChangeTaskReference removeNode(@Nonnull NodeId id);
 
     /**
      * Stop node.
@@ -83,5 +35,11 @@ public interface Node {
      * @throws InterruptedException if interrupted
      */
     void stop() throws InterruptedException;
+
+    void registerStateMachine(StateMachine stateMachine);
+
+
+     @Nonnull
+     RoleNameAndLeaderId getRoleNameAndLeaderId() ;
 
 }

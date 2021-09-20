@@ -28,6 +28,7 @@ public class MemoryLog extends AbstractLog {
     public MemoryLog( EntrySequence entrySequence, EventBus eventBus) {
         super(eventBus);
         this.entrySequence = entrySequence;
+
     }
 
 

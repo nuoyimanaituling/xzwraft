@@ -57,6 +57,10 @@ class RootDir {
         return generation;
     }
 
+    /**
+     * 找到最新的日志文件
+     * @return
+     */
     LogGeneration getLatestGeneration() {
         File[] files = baseDir.listFiles();
         if (files == null) {

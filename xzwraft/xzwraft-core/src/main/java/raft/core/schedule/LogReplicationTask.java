@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * 创建日志复制定时器
  */
 public class LogReplicationTask {
+    public static final LogReplicationTask NONE = new LogReplicationTask(new NullScheduledFuture());
     private static final Logger logger = LoggerFactory.getLogger(LogReplicationTask.class);
     private final ScheduledFuture<?> scheduledFuture;
 

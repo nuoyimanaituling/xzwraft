@@ -160,13 +160,13 @@ class NodeGroup {
      *
      * @param nextLogIndex next log index
      */
-//    void resetReplicatingStates(int nextLogIndex) {
-//        for (GroupMember member : memberMap.values()) {
-//            if (!member.idEquals(selfId)) {
-//                member.setReplicatingState(new ReplicatingState(nextLogIndex));
-//            }
-//        }
-//    }
+    void resetReplicatingStates(int nextLogIndex) {
+        for (GroupMember member : memberMap.values()) {
+            if (!member.idEquals(selfId)) {
+                member.setReplicatingState(new ReplicatingState(nextLogIndex));
+            }
+        }
+    }
 
     /**
      * Get match index of major members.
@@ -228,13 +228,13 @@ class NodeGroup {
      * @param major      major
      * @return added member
      */
-//    GroupMember addNode(NodeEndpoint endpoint, int nextIndex, int matchIndex, boolean major) {
-//        logger.info("add node {} to group", endpoint.getId());
-//        ReplicatingState replicatingState = new ReplicatingState(nextIndex, matchIndex);
-//        GroupMember member = new GroupMember(endpoint, replicatingState, major);
-//        memberMap.put(endpoint.getId(), member);
-//        return member;
-//    }
+    GroupMember addNode(NodeEndpoint endpoint, int nextIndex, int matchIndex, boolean major) {
+        logger.info("add node {} to group", endpoint.getId());
+        ReplicatingState replicatingState = new ReplicatingState(nextIndex, matchIndex);
+        GroupMember member = new GroupMember(endpoint, replicatingState, major);
+        memberMap.put(endpoint.getId(), member);
+        return member;
+    }
 
     /**
      * Update member list.

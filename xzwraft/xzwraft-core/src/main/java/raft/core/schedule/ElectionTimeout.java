@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class ElectionTimeout {
 
     private static final Logger logger = LoggerFactory.getLogger(ElectionTimeout.class);
+    public static final ElectionTimeout NONE = new ElectionTimeout(new NullScheduledFuture());
 
     private final ScheduledFuture<?> scheduledFuture;
 
@@ -26,7 +27,6 @@ public class ElectionTimeout {
         this.scheduledFuture.cancel(false);
     }
 
-
     @Override
     public String toString() {
         if (this.scheduledFuture.isCancelled()) {
@@ -37,9 +37,5 @@ public class ElectionTimeout {
         }
         return "ElectionTimeout{delay=" + scheduledFuture.getDelay(TimeUnit.MILLISECONDS) + "ms}";
     }
-
-
-
-
 
 }

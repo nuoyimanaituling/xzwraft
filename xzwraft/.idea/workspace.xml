@@ -10,6 +10,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package-info" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -24,79 +25,78 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/xzwraft-kvstore/src/main/java/raft/kvstore/client" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xzw\Desktop\xzwRaft" />
-      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src\test\java\raft" />
-      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src\main\java\raft\core\rpc" />
-      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src\main\resources" />
-      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src\main\java\raft" />
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-kvstore\src\main\java\raft\kvstore\client" />
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src\main\java\raft\core\service" />
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-kvstore\src" />
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-kvstore\src\main\java\raft\kvstore\server" />
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-kvstore" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="raft" />
-      <recent name="raft.core.support" />
-      <recent name="raft.core.rpc.nio" />
-      <recent name="raft.core.rpc.message" />
-      <recent name="raft.core" />
+      <recent name="raft.core.log.statemachine" />
+      <recent name="raft.kvstore.client" />
+      <recent name="raft.core.service" />
+      <recent name="raft.message" />
+      <recent name="raft.kvstore.server" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-kvstore\src" />
       <recent name="C:\Users\xzw\Desktop\xzwRaft\xzwraft-core\src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EntryIndexFileTest.testIterator">
-    <configuration name="EntryIndexFileTest.testIterator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xzwraft-core" />
+  <component name="RunManager" selected="Application.ServerLauncher2">
+    <configuration name="ConsoleLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="raft.kvstore.client.ConsoleLauncher" />
+      <module name="xzwraft-kvstore" />
+      <option name="PROGRAM_PARAMETERS" value="-gc A,localhost,3333" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="raft.sequence.*" />
+          <option name="PATTERN" value="raft.kvstore.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="raft.sequence" />
-      <option name="MAIN_CLASS_NAME" value="raft.sequence.EntryIndexFileTest" />
-      <option name="METHOD_NAME" value="testIterator" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EntryIndexFileTest.testIteratorModification" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xzwraft-core" />
+    <configuration name="ServerLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="raft.kvstore.server.ServerLauncher" />
+      <module name="xzwraft-kvstore" />
+      <option name="PROGRAM_PARAMETERS" value="myraft-kvstore -gc A,localhost,2333 B,localhost,2334 C,localhost,2335 -m group-member -i A -p2 3333" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="raft.sequence.*" />
+          <option name="PATTERN" value="raft.kvstore.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="raft.sequence" />
-      <option name="MAIN_CLASS_NAME" value="raft.sequence.EntryIndexFileTest" />
-      <option name="METHOD_NAME" value="testIteratorModification" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileEntrySequenceTest.testCommitMultiple" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xzwraft-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="raft.entry.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="raft.entry" />
-      <option name="MAIN_CLASS_NAME" value="raft.entry.FileEntrySequenceTest" />
-      <option name="METHOD_NAME" value="testCommitMultiple" />
-      <option name="TEST_OBJECT" value="method" />
+    <configuration name="ServerLauncher1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="raft.kvstore.server.ServerLauncher" />
+      <module name="xzwraft-kvstore" />
+      <option name="PROGRAM_PARAMETERS" value="myraft-kvstore -gc A,localhost,2333 B,localhost,2334 C,localhost,2335 -m group-member -i B -p2 3334" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileEntrySequenceTest.testRemoveAfterEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServerLauncher2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="raft.kvstore.server.ServerLauncher" />
+      <module name="xzwraft-kvstore" />
+      <option name="PROGRAM_PARAMETERS" value="myraft-kvstore -gc A,localhost,2333 B,localhost,2334 C,localhost,2335 -m group-member -i C -p2 3335" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileEntrySequenceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xzwraft-core" />
       <extension name="coverage">
         <pattern>
@@ -106,35 +106,59 @@
       </extension>
       <option name="PACKAGE_NAME" value="raft.entry" />
       <option name="MAIN_CLASS_NAME" value="raft.entry.FileEntrySequenceTest" />
-      <option name="METHOD_NAME" value="testRemoveAfterEmpty" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileEntrySequenceTest.testRemoveAfterEntriesInFile2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NodeImplTest.testOnReceiveAppendEntriesRpcFollower" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xzwraft-core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="raft.entry.*" />
+          <option name="PATTERN" value="raft.node.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="raft.entry" />
-      <option name="MAIN_CLASS_NAME" value="raft.entry.FileEntrySequenceTest" />
-      <option name="METHOD_NAME" value="testRemoveAfterEntriesInFile2" />
+      <option name="PACKAGE_NAME" value="raft.node" />
+      <option name="MAIN_CLASS_NAME" value="raft.node.NodeImplTest" />
+      <option name="METHOD_NAME" value="testOnReceiveAppendEntriesRpcFollower" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SetCommandTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xzwraft-kvstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="raft.message.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="raft.message" />
+      <option name="MAIN_CLASS_NAME" value="raft.message.SetCommandTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ServerLauncher1" />
+      <item itemvalue="Application.ServerLauncher2" />
+      <item itemvalue="Application.ServerLauncher" />
+      <item itemvalue="Application.ConsoleLauncher" />
+      <item itemvalue="JUnit.FileEntrySequenceTest" />
+      <item itemvalue="JUnit.NodeImplTest.testOnReceiveAppendEntriesRpcFollower" />
+      <item itemvalue="JUnit.SetCommandTest.test" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EntryIndexFileTest.testIterator" />
-        <item itemvalue="JUnit.EntryIndexFileTest.testIteratorModification" />
-        <item itemvalue="JUnit.FileEntrySequenceTest.testRemoveAfterEntriesInFile2" />
-        <item itemvalue="JUnit.FileEntrySequenceTest.testRemoveAfterEmpty" />
-        <item itemvalue="JUnit.FileEntrySequenceTest.testCommitMultiple" />
+        <item itemvalue="Application.ConsoleLauncher" />
+        <item itemvalue="Application.ServerLauncher" />
+        <item itemvalue="JUnit.SetCommandTest.test" />
+        <item itemvalue="JUnit.NodeImplTest.testOnReceiveAppendEntriesRpcFollower" />
+        <item itemvalue="JUnit.FileEntrySequenceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -154,6 +178,8 @@
       <workItem from="1631715243752" duration="8552000" />
       <workItem from="1631772399333" duration="3000" />
       <workItem from="1631772451284" duration="244000" />
+      <workItem from="1631774267527" duration="62908000" />
+      <workItem from="1632101256877" duration="15856000" />
     </task>
     <servers />
   </component>
@@ -161,53 +187,100 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1631693120121">
+    <state x="444" y="28" key="#ServerLauncher2" timestamp="1632037131299">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1631693120121" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1631713303066">
+    <state x="444" y="28" key="#ServerLauncher2/0.0.1536.824@0.0.1536.824" timestamp="1632037131299" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1632040677625">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1631713303066" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1632040677625" />
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1632118827622">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1632118827622" />
+    <state x="498" y="201" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1632037089823">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="201" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1632037089823" />
+    <state x="392" y="335" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1632019190774">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="392" y="335" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1632019190774" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1631715658008">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1631715658008" />
+    <state x="784" y="229" key="#xdebugger.evaluate" timestamp="1632106974386">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="784" y="229" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1632106974386" />
+    <state width="471" height="463" key="DebuggerActiveHint" timestamp="1632103778973">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="471" height="463" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1632103778973" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1631517437618">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1631517437618" />
-    <state width="1493" height="32" key="GridCell.Tab.0.bottom" timestamp="1631772363799">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1632122061855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="32" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1631772363799" />
-    <state width="1493" height="32" key="GridCell.Tab.0.center" timestamp="1631772363799">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1632122061855" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1632122061855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="32" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1631772363799" />
-    <state width="1493" height="32" key="GridCell.Tab.0.left" timestamp="1631772363799">
+    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1632122061855" />
+    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1632122061855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="32" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1631772363799" />
-    <state width="1493" height="32" key="GridCell.Tab.0.right" timestamp="1631772363799">
+    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1632122061855" />
+    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1632122061855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="32" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1631772363799" />
-    <state x="492" y="139" width="639" height="584" key="find.popup" timestamp="1631589845595">
+    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1632122061855" />
+    <state width="1493" height="530" key="GridCell.Tab.1.bottom" timestamp="1632122061854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="492" y="139" width="639" height="584" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1631589845595" />
-    <state x="178" y="73" key="new project wizard" timestamp="1631539845880">
+    <state width="1493" height="530" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1632122061854" />
+    <state width="1493" height="530" key="GridCell.Tab.1.center" timestamp="1632122061854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="178" y="73" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1631539845880" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1631714754250">
+    <state width="1493" height="530" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1632122061854" />
+    <state width="1493" height="530" key="GridCell.Tab.1.left" timestamp="1632122061854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1631714754250" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1631696745162">
+    <state width="1493" height="530" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1632122061854" />
+    <state width="1493" height="530" key="GridCell.Tab.1.right" timestamp="1632122061854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1631696745162" />
+    <state width="1493" height="530" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1632122061854" />
+    <state x="492" y="139" width="639" height="584" key="find.popup" timestamp="1632104696269">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="492" y="139" width="639" height="584" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1632104696269" />
+    <state x="178" y="73" key="new project wizard" timestamp="1632018803820">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="178" y="73" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1632018803820" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1632119080945">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1632119080945" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1632117111286">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1632117111286" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/xzwraft-core/src/main/java/raft/core/log/AbstractLog.java</url>
+          <line>180</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

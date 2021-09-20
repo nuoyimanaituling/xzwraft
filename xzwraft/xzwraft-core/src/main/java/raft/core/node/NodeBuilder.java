@@ -11,6 +11,7 @@ import raft.core.node.store.FileNodeStore;
 import raft.core.node.store.MemoryNodeStore;
 import raft.core.node.store.NodeStore;
 import raft.core.rpc.Connector;
+import raft.core.rpc.nio.NioConnector;
 import raft.core.schedule.DefaultScheduler;
 import raft.core.schedule.Scheduler;
 import raft.core.support.SingleThreadTaskExecutor;
@@ -100,6 +101,10 @@ public class NodeBuilder {
         this.group = new NodeGroup(endpoints, selfId);
         this.selfId = selfId;
         this.eventBus = new EventBus(selfId.getValue());
+
+        /**
+         * 然后就把您的邮箱给记了下来，给您写这一封邮件的原因是，
+         */
     }
 
     /**
@@ -136,7 +141,7 @@ public class NodeBuilder {
      * @param connector connector
      * @return this
      */
-   NodeBuilder setConnector(@Nonnull Connector connector) {
+   public NodeBuilder setConnector(@Nonnull Connector connector) {
         Preconditions.checkNotNull(connector);
         this.connector = connector;
         return this;
@@ -161,7 +166,7 @@ public class NodeBuilder {
      * @param scheduler scheduler
      * @return this
      */
-    NodeBuilder setScheduler(@Nonnull Scheduler scheduler) {
+    public NodeBuilder setScheduler(@Nonnull Scheduler scheduler) {
         Preconditions.checkNotNull(scheduler);
         this.scheduler = scheduler;
         return this;
@@ -173,7 +178,7 @@ public class NodeBuilder {
      * @param taskExecutor task executor
      * @return this
      */
-    NodeBuilder setTaskExecutor(@Nonnull TaskExecutor taskExecutor) {
+    public NodeBuilder setTaskExecutor(@Nonnull TaskExecutor taskExecutor) {
         Preconditions.checkNotNull(taskExecutor);
         this.taskExecutor = taskExecutor;
         return this;
@@ -185,7 +190,7 @@ public class NodeBuilder {
      * @param groupConfigChangeTaskExecutor group config change task executor
      * @return this
      */
-    NodeBuilder setGroupConfigChangeTaskExecutor(@Nonnull TaskExecutor groupConfigChangeTaskExecutor) {
+    public NodeBuilder setGroupConfigChangeTaskExecutor(@Nonnull TaskExecutor groupConfigChangeTaskExecutor) {
         Preconditions.checkNotNull(groupConfigChangeTaskExecutor);
         this.groupConfigChangeTaskExecutor = groupConfigChangeTaskExecutor;
         return this;
@@ -197,7 +202,7 @@ public class NodeBuilder {
      * @param store store
      * @return this
      */
-   NodeBuilder setStore(@Nonnull NodeStore store) {
+   public NodeBuilder setStore(@Nonnull NodeStore store) {
         Preconditions.checkNotNull(store);
         this.store = store;
         return this;
@@ -241,31 +246,31 @@ public class NodeBuilder {
     private NodeContext buildContext() {
         NodeContext context = new NodeContext();
         context.setGroup(group);
-        context.setLog(log != null ? log : new MemoryLog());
+        context.setLog(log != null ? log : new MemoryLog(eventBus));
         context.setStore(store != null ? store : new MemoryNodeStore());
         context.setSelfId(selfId);
         context.setEventBus(eventBus);
-        context.setScheduler(scheduler != null ? scheduler : new DefaultScheduler(300,400,0,1000));
-        context.setConnector(connector);
+        context.setScheduler(scheduler != null ? scheduler : new DefaultScheduler(3000,4000,0,1000));
+        context.setConnector(connector != null ? connector : createNioConnector());
         context.setTaskExecutor(taskExecutor != null ? taskExecutor :
                 new SingleThreadTaskExecutor("node")
         );
         return context;
     }
 
-//    /**
-//     * Create nio connector.
-//     *
-//     * @return nio connector
-//     */
-//    @Nonnull
-//    private NioConnector createNioConnector() {
-//        int port = group.findSelf().getEndpoint().getPort();
-//        if (workerNioEventLoopGroup != null) {
-//            return new NioConnector(workerNioEventLoopGroup, selfId, eventBus, port);
-//        }
-//        return new NioConnector(new NioEventLoopGroup(config.getNioWorkerThreads()), false, selfId, eventBus, port);
-//    }
+    /**
+     * Create nio connector.
+     *
+     * @return nio connector
+     */
+    @Nonnull
+    private NioConnector createNioConnector() {
+        int port = group.findSelf().getEndpoint().getPort();
+        if (workerNioEventLoopGroup != null) {
+            return new NioConnector(workerNioEventLoopGroup, selfId, eventBus, port,1000);
+        }
+        return new NioConnector(new NioEventLoopGroup(10), false, selfId, eventBus, port,1000);
+    }
 
 
 
