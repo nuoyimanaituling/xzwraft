@@ -2,11 +2,23 @@
 
 # Note
 
-this implementation benefit from 
+Raft是一个leader模式的强一致算法。这是一个基于Raft实现的Key-value数据库,如果您正在学习raft，或者正在实现一个简易的分布式key-value存储，或许我的实现可以给您参考。
 
-[xraft]: https://github.com/nuoyimanaituling/xzwraft
+## kv系统核心架构图：
 
-and i simplify his implementation  to more understand.
+<img src="../typoraPicture/image-20210928081813569.png" alt="image-20210928081813569" style="zoom:50%;" />
+
+
+
+## 日志复制：
+
+![image-20210928162530051](../typoraPicture/image-20210928162530051.png)
+
+![image-20210928162552609](../typoraPicture/image-20210928162552609.png)
+
+
+
+
 
 # 领导者选举
 
@@ -24,10 +36,6 @@ log[] :日志条目，第一个日志的id为1
 
 
 # 所有服务器需遵守的规则：
-
-
-
-
 
 所有服务器上的易失性状态
 
@@ -53,15 +61,15 @@ lastApplied：由应用状态机（stateMachine）负责维护（即具体执行
 
 所有服务器：
 
-- 如果`commitIndex > lastApplied`，那么就 lastApplied 加一，并把`log[lastApplied]`应用到状态机中（5.3 节）（**这里我们把它定义为两步提交，先增加lastapplied，然后应用到状态机中执行，领导人来决定什么时候把日志条目应用到状态机中是安全的；这种日志条目被称为已提交。Raft 算法保证所有已提交的日志条目都是持久化的并且最终会被所有可用的状态机执行。**）
-- 如果接收到的 RPC 请求或响应中，任期号`T > currentTerm`，那么就令 currentTerm 等于 T，并切换状态为跟随者（5.1 节）
+- 如果`commitIndex > lastApplied`，那么就 lastApplied 加一，并把`log[lastApplied]`应用到状态机中（**这里我们把它定义为两步提交，先增加lastapplied，然后应用到状态机中执行，领导人来决定什么时候把日志条目应用到状态机中是安全的；这种日志条目被称为已提交。Raft 算法保证所有已提交的日志条目都是持久化的并且最终会被所有可用的状态机执行。**）
+- 如果接收到的 RPC 请求或响应中，任期号`T > currentTerm`，那么就令 currentTerm 等于 T，并切换状态为跟随者
 
-跟随者（5.2 节）：
+跟随者：
 
 - 响应来自候选人和领导者的请求
 - 如果在超过选举超时时间的情况之前没有收到**当前领导人**（即该领导人的任期需与这个跟随者的当前任期相同）的心跳/附加日志，或者是给某个候选人投了票，就自己变成候选人。（**设计算法角色的时候，在一开始就是跟随者，等到成员上线的时候，能够达到条件，然后再开始选举（成为候选者），而一开始在考虑的时候并没有考虑到这个结果**）
 
-候选人（5.2 节）：
+候选人：
 
 - 在转变成候选人后就立即开始选举过程
   - 自增当前的任期号（currentTerm）
@@ -74,12 +82,12 @@ lastApplied：由应用状态机（stateMachine）负责维护（即具体执行
 
 领导人：
 
-- 一旦成为领导人：发送空的附加日志 RPC（心跳）给其他所有的服务器；在一定的空余时间之后不停的重复发送，以阻止跟随者超时（**防止频繁发生选举**）（5.2 节）
-- 如果接收到来自客户端的请求：附加条目到本地日志中，在条目被应用到状态机后响应客户端（5.3 节）
+- 一旦成为领导人：发送空的附加日志 RPC（心跳）给其他所有的服务器；在一定的空余时间之后不停的重复发送，以阻止跟随者超时（**防止频繁发生选举**）
+- 如果接收到来自客户端的请求：附加条目到本地日志中，在条目被应用到状态机后响应客户端
 - 如果对于一个跟随者，最后日志条目的索引值大于等于 nextIndex，那么：发送从 nextIndex 开始的所有日志条目：
   - 如果成功：更新相应跟随者的 nextIndex 和 matchIndex
   - 如果因为日志不一致而失败，减少 nextIndex 重试
-- 如果存在一个满足`N > commitIndex`的 N，并且大多数的`matchIndex[i] ≥ N`成立，并且`log[N].term == currentTerm`成立，那么令 commitIndex 等于这个 N （5.3 和 5.4 节）
+- 如果存在一个满足`N > commitIndex`的 N，并且大多数的`matchIndex[i] ≥ N`成立，并且`log[N].term == currentTerm`成立，那么令 commitIndex 等于这个 N 
 
 
 
@@ -338,174 +346,7 @@ Entries和EntryIndexFile的实现都使用了R使用了RandomAccessFile，将Ran
 
 
 
-# 核心代码：
-
-```java
-private void doProcessAppendEntriesResult(AppendEntriesResultMessage resultMessage) {
-    AppendEntriesResult result = resultMessage.get();
-
-    // step down if result's term is larger than current term
-    if (result.getTerm() > role.getTerm()) {
-        becomeFollower(result.getTerm(), null, null, true);
-        return;
-    }
-
-    // check role 不是leader的话打印警告信息
-    if (role.getName() != RoleName.LEADER) {
-        logger.warn("receive append entries result from node {} but current node is not leader, ignore", resultMessage.getSourceNodeId());
-        return;
-    }
-
-
-    NodeId sourceNodeId = resultMessage.getSourceNodeId();
-    GroupMember member = context.group().getMember(sourceNodeId);
-    if (member == null) {
-        logger.info("unexpected append entries result from node {}, node maybe removed", sourceNodeId);
-        return;
-    }
-    AppendEntriesRpc rpc =resultMessage.getRpc();
-
-    if (result.isSuccess()) {
-        // peer
-        // advance commit index if major of match index changed(推进每个服务器本身的nextlog与matchIndex)
-        if (member.advanceReplicatingState(rpc.getLastEntryIndex())) {
-            // 推进leader服务器本地的commitIndex
-            context.log().advanceCommitIndex(context.group().getMatchIndexOfMajor(),role.getTerm());
-
-        }
-        else {
-            // 对于result不成功的响应，leader服务器需要回退nextIndex
-            if (!member.backOffNextIndex()) {
-                logger.warn("cannot back off next index more, node {}", sourceNodeId);
-                member.stopReplicating();
-                return;
-            }
-        }
-    }
-```
-
-```java
-private AppendEntriesResult doProcessAppendEntriesRpc(AppendEntriesRpcMessage rpcMessage) {
-    AppendEntriesRpc rpc = rpcMessage.get();
-
-    // reply current term if term in rpc is smaller than current term
-    if (rpc.getTerm() < role.getTerm()) {
-        return new AppendEntriesResult(rpc.getMessageId(),role.getTerm(), false);
-    }
-
-    // if term in rpc is larger than current term, step down and append entries
-    if (rpc.getTerm() > role.getTerm()) {
-        becomeFollower(rpc.getTerm(), null, rpc.getLeaderId(), true);
-        return new AppendEntriesResult( rpc.getMessageId(),rpc.getTerm(), appendEntries(rpc));
-    }
-
-    assert rpc.getTerm() == role.getTerm();
-    switch (role.getName()) {
-        case FOLLOWER:
-
-            // reset election timeout and append entries
-            becomeFollower(rpc.getTerm(), ((FollowerNodeRole) role).getVotedFor(), rpc.getLeaderId(), true);
-            // 增加entries到存储当中
-            return new AppendEntriesResult(rpc.getMessageId(),rpc.getTerm(), appendEntries(rpc));
-        case CANDIDATE:
-
-            // more than one candidate but another node won the election
-            // 如果作为candidate收到主节点发来的消息，那么自己选择退化为follower，重置选举超时
-            becomeFollower(rpc.getTerm(), null, rpc.getLeaderId(),  true);
-            return new AppendEntriesResult(rpc.getMessageId(),rpc.getTerm(), appendEntries(rpc));
-        case LEADER:
-            logger.warn("receive append entries rpc from another leader {}, ignore", rpc.getLeaderId());
-            return new AppendEntriesResult(rpc.getMessageId(),rpc.getTerm(), false);
-        default:
-            throw new IllegalStateException("unexpected node role [" + role.getName() + "]");
-    }
-
-}
-```
-
-```java
-private RequestVoteResult doProcessRequestVoteRpc(RequestVoteRpcMessage rpcMessage) {
 
 
 
-        // 如果对方的term比自己小，则不投票并且返回自己的term给对象
-        RequestVoteRpc rpc = rpcMessage.get();
-        if (rpc.getTerm() < role.getTerm()) {
-            logger.debug("term from rpc < current term, don't vote ({} < {})", rpc.getTerm(), role.getTerm());
-            return new RequestVoteResult(role.getTerm(), false);
-        }
-      // 检查是否自己投票
-        boolean voteForCandidate =!context.log().isNewerThan(rpc.getLastLogIndex(),rpc.getLastLogTerm());
 
-        // 如果对象的term比自己大，则切换为follower
-        if (rpc.getTerm() > role.getTerm()) {
-            becomeFollower(rpc.getTerm(), (voteForCandidate ? rpc.getCandidateId() : null), null,true);
-            return new RequestVoteResult(rpc.getTerm(), voteForCandidate);
-        }
-
-//        assert rpc.getTerm() == role.getTerm();
-        // 当对方的2term与自己的一致时
-        switch (role.getName()) {
-            // 如果自己是follower
-            case FOLLOWER:
-                FollowerNodeRole follower = (FollowerNodeRole) role;
-                NodeId votedFor = follower.getVotedFor();
-                // reply vote granted for
-                // 1. not voted and candidate's log is newer than self
-                // 2. voted for candidate
-                if ((votedFor == null && !context.log().isNewerThan(rpc.getLastLogIndex(), rpc.getLastLogTerm())) ||
-                        Objects.equals(votedFor, rpc.getCandidateId())) {
-                    becomeFollower(role.getTerm(), rpc.getCandidateId(), null, true);
-                    return new RequestVoteResult(rpc.getTerm(), true);
-                }
-                return new RequestVoteResult(role.getTerm(), false);
-            case CANDIDATE: // 自己是候选者的话，已经给自己投过票了,所以不会再投票了
-            case LEADER:
-                return new RequestVoteResult(role.getTerm(), false);
-            default:
-                throw new IllegalStateException("unexpected node role [" + role.getName() + "]");
-        }
-    }
-```
-
-```java
- private void doProcessRequestVoteResult(RequestVoteResult result) {
-
-        // 如果对象的term比自己打，则退化为follower角色
-        if (result.getTerm() > role.getTerm()) {
-            becomeFollower(result.getTerm(), null, null, true);
-            return;
-        }
-        // 如果自己不是candidate角色，就忽略
-        // check role
-        if (role.getName() != RoleName.CANDIDATE) {
-            logger.debug("receive request vote result and current role is not candidate, ignore");
-            return;
-        }
-
-        // do nothing if not vote granted
-        if (result.getTerm()<role.getTerm() || !result.isVoteGranted()) {
-            return;
-        }
-        // 否则，则可以判定result.isVoteGranted为true，则可以认为给自己加上一票
-
-        int currentVotesCount = ((CandidateNodeRole) role).getVotesCount() + 1;
-        // 获取票数
-        int countOfMajor = context.group().getCount();
-        logger.debug("votes count {}, major node count {}", currentVotesCount, countOfMajor);
-        role.cancelTimeoutOrTask();
-        if (currentVotesCount > countOfMajor / 2) {
-            // 计算票数如果超过一半票数，那么自己成为leader
-            // become leader
-            logger.info("become leader, term {}", role.getTerm());
-//            resetReplicatingStates(); 只是简单的把nextIndex与matchIndex重置为0
-            changeToRole(new LeaderNodeRole(role.getTerm(), scheduleLogReplicationTask()));
-            context.log().appendEntry(role.getTerm()); //发送 no-op log，然后让系统趋于稳定
-            context.connector().resetChannels(); // close all inbound channels
-        } else {
-
-            // update votes count
-            changeToRole(new CandidateNodeRole(role.getTerm(), currentVotesCount, scheduleElectionTimeout()));
-        }
-    }
-```
