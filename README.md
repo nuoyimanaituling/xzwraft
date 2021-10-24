@@ -4,6 +4,16 @@
 
 Raft是一个leader模式的强一致算法。这是一个基于Raft实现的Key-value数据库,如果您正在学习raft，或者正在实现一个简易的分布式key-value存储，或许我的实现可以给您参考。
 
+## xzwRaft架构图
+
+<img src="../typoraPicture/image-20211024173123268.png" alt="image-20211024173123268" style="zoom:50%;" />
+
+## xzwkvstore架构图
+
+<img src="../typoraPicture/image-20211024173143491.png" alt="image-20211024173143491" style="zoom:50%;" />
+
+
+
 ## kv系统核心架构图：
 
 <img src="../typoraPicture/image-20210928081813569.png" alt="image-20210928081813569" style="zoom:50%;" />
@@ -47,10 +57,6 @@ log[] :日志条目，第一个日志的id为1
 commitIndex:由sequence负责维护
 
 lastApplied：由应用状态机（stateMachine）负责维护（即具体执行到哪一步）
-
-
-
-
 
 领导者（服务器）上的易失性状态 (选举后已经重新初始化)
 
@@ -343,9 +349,6 @@ nextlogIndex：表示下一条要加入的日志条目的索引。
 等待写入的日志条目缓冲pendEntries
 
 Entries和EntryIndexFile的实现都使用了R使用了RandomAccessFile，将RandomAccessfile方法抽象出来
-
-
-
 
 
 
