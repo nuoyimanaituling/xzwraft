@@ -6,25 +6,25 @@ Raft是一个leader模式的强一致算法。这是一个基于Raft实现的Key
 
 ## xzwRaft架构图
 
-<img src="../typoraPicture/image-20211024173123268.png" alt="image-20211024173123268" style="zoom:50%;" />
+<img src="https://github.com/nuoyimanaituling/xzwraft/blob/master/image/1.png" alt="image-20211024173123268" style="zoom:50%;" />
 
 ## xzwkvstore架构图
 
-<img src="../typoraPicture/image-20211024173143491.png" alt="image-20211024173143491" style="zoom:50%;" />
+<img src="https://github.com/nuoyimanaituling/xzwraft/blob/master/image/2.png" style="zoom:50%;" />
 
 
 
 ## kv系统核心架构图：
 
-<img src="../typoraPicture/image-20210928081813569.png" alt="image-20210928081813569" style="zoom:50%;" />
+<img src="https://github.com/nuoyimanaituling/xzwraft/blob/master/image/3.png" style="zoom:50%;" />
 
 
 
 ## 日志复制：
 
-![image-20210928162530051](../typoraPicture/image-20210928162530051.png)
+![image-20210928162530051](https://github.com/nuoyimanaituling/xzwraft/blob/master/image/4.png)
 
-![image-20210928162552609](../typoraPicture/image-20210928162552609.png)
+![image-20210928162552609](https://github.com/nuoyimanaituling/xzwraft/blob/master/image/5.png)
 
 
 
