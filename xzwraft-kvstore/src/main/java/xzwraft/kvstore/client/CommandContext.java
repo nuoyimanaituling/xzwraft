@@ -1,8 +1,8 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.Address;
-import in.xnnyygn.xraft.core.service.ServerRouter;
+import xzwraft.core.node.NodeId;
+import xzwraft.core.rpc.Address;
+import xzwraft.core.service.ServerRouter;
 
 import java.util.Map;
 

@@ -1,6 +1,6 @@
 package xzwraft.core.rpc;
 
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import xzwraft.core.rpc.message.*;
 
 import javax.annotation.Nonnull;

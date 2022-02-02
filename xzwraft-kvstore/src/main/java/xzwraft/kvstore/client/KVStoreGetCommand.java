@@ -1,6 +1,6 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.service.NoAvailableServerException;
+import xzwraft.core.service.NoAvailableServerException;
 
 public class KVStoreGetCommand implements Command {
 

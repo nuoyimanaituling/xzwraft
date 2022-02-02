@@ -1,6 +1,6 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.node.NodeId;
+import xzwraft.core.node.NodeId;
 
 public class ClientSetLeaderCommand implements Command {
 

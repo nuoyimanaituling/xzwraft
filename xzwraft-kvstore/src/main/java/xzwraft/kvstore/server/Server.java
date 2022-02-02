@@ -1,6 +1,6 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
-import in.xnnyygn.xraft.core.node.Node;
+import xzwraft.core.node.Node;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

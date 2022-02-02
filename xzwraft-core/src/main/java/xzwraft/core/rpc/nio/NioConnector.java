@@ -7,7 +7,7 @@ import xzwraft.core.node.NodeId;
 import xzwraft.core.rpc.Channel;
 import xzwraft.core.rpc.ChannelConnectException;
 import xzwraft.core.rpc.Connector;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

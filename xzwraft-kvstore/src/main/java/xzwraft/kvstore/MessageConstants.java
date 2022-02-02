@@ -1,4 +1,4 @@
-package in.xnnyygn.xraft.kvstore;
+package xzwraft.kvstore;
 
 public class MessageConstants {
 

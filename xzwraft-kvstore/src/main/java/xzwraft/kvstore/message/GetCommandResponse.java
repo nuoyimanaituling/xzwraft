@@ -1,4 +1,4 @@
-package in.xnnyygn.xraft.kvstore.message;
+package xzwraft.kvstore.message;
 
 public class GetCommandResponse {
 

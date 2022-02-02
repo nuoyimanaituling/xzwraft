@@ -2,7 +2,7 @@ package xzwraft.core.rpc.nio;
 
 import xzwraft.core.rpc.Channel;
 import xzwraft.core.rpc.ChannelException;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import xzwraft.core.rpc.message.*;
 
 import javax.annotation.Nonnull;

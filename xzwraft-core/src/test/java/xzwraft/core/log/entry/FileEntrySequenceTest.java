@@ -1,6 +1,6 @@
 package xzwraft.core.log.entry;
 
-import in.xnnyygn.xraft.core.log.sequence.*;
+import xzwraft.core.log.sequence.*;
 import xzwraft.core.log.sequence.EntriesFile;
 import xzwraft.core.log.sequence.EntryIndexFile;
 import xzwraft.core.log.sequence.FileEntrySequence;

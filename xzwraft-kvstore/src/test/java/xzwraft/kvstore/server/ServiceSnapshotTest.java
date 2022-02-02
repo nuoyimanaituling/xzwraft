@@ -1,4 +1,4 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "in.xnnyygn.xraft.core";
+option java_package = "xzwraft.core";
 option java_outer_classname = "Protos";
 
 // common

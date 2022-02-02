@@ -4,7 +4,7 @@ import xzwraft.core.Protos;
 import xzwraft.core.log.entry.EntryFactory;
 import xzwraft.core.node.NodeEndpoint;
 import xzwraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;

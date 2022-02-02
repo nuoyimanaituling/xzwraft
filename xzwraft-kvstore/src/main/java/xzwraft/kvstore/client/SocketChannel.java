@@ -1,13 +1,13 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.MessageLite;
-import in.xnnyygn.xraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.service.*;
-import in.xnnyygn.xraft.kvstore.MessageConstants;
-import in.xnnyygn.xraft.kvstore.Protos;
-import in.xnnyygn.xraft.kvstore.message.GetCommand;
-import in.xnnyygn.xraft.kvstore.message.SetCommand;
+import xzwraft.core.node.NodeId;
+import xzwraft.core.service.*;
+import xzwraft.kvstore.MessageConstants;
+import xzwraft.kvstore.Protos;
+import xzwraft.kvstore.message.GetCommand;
+import xzwraft.kvstore.message.SetCommand;
 
 import java.io.*;
 import java.net.InetSocketAddress;

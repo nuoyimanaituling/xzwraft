@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xraft-core</artifactId>
+    <artifactId>xzwraft-core</artifactId>
     <packaging>jar</packaging>
     <version>0.1.0-SNAPSHOT</version>
 
-    <name>xraft-core</name>
+    <name>xzwraft-core</name>
 
     <parent>
-        <groupId>in.xnnyygn.xraft</groupId>
-        <artifactId>xraft-parent</artifactId>
+        <groupId>xzwraft</groupId>
+        <artifactId>xzwraft-parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 

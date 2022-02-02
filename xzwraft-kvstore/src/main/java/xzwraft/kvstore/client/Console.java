@@ -1,7 +1,7 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.Address;
+import xzwraft.core.node.NodeId;
+import xzwraft.core.rpc.Address;
 import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
@@ -69,7 +69,7 @@ public class Console {
     }
 
     private void showInfo() {
-        System.out.println("Welcome to XRaft KVStore Shell\n");
+        System.out.println("Welcome to XZWRaft KVStore Shell\n");
         System.out.println("***********************************************");
         System.out.println("current server list: \n");
         commandContext.printSeverList();

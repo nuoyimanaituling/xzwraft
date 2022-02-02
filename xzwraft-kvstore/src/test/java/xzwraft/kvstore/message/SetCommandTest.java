@@ -1,9 +1,7 @@
-package in.xnnyygn.xraft.kvstore.message;
+package xzwraft.kvstore.message;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 public class SetCommandTest {
 

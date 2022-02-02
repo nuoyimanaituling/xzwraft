@@ -2,7 +2,7 @@ package xzwraft.core.rpc;
 
 import xzwraft.core.node.NodeEndpoint;
 import xzwraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import xzwraft.core.rpc.message.*;
 
 import javax.annotation.Nonnull;

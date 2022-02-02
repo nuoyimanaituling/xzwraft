@@ -1,9 +1,9 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
-import in.xnnyygn.xraft.core.node.Node;
-import in.xnnyygn.xraft.core.node.NodeBuilder;
-import in.xnnyygn.xraft.core.node.NodeEndpoint;
-import in.xnnyygn.xraft.core.node.NodeId;
+import xzwraft.core.node.Node;
+import xzwraft.core.node.NodeBuilder;
+import xzwraft.core.node.NodeEndpoint;
+import xzwraft.core.node.NodeId;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +72,7 @@ public class ServerLauncher {
 
         if (args.length == 0) {
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("xraft-kvstore [OPTION]...", options);
+            formatter.printHelp("xzwraft-kvstore [OPTION]...", options);
             return;
         }
 

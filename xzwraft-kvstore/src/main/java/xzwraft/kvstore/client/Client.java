@@ -1,10 +1,10 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.service.AddNodeCommand;
-import in.xnnyygn.xraft.core.service.RemoveNodeCommand;
-import in.xnnyygn.xraft.core.service.ServerRouter;
-import in.xnnyygn.xraft.kvstore.message.GetCommand;
-import in.xnnyygn.xraft.kvstore.message.SetCommand;
+import xzwraft.core.service.AddNodeCommand;
+import xzwraft.core.service.RemoveNodeCommand;
+import xzwraft.core.service.ServerRouter;
+import xzwraft.kvstore.message.GetCommand;
+import xzwraft.kvstore.message.SetCommand;
 
 public class Client {
 

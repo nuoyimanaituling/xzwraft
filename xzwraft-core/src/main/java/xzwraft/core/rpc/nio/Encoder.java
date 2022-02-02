@@ -4,7 +4,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.MessageLite;
 import xzwraft.core.Protos;
 import xzwraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;

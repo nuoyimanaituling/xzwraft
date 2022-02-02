@@ -1,7 +1,7 @@
 package xzwraft.core.node;
 
 import com.google.common.collect.ImmutableSet;
-import in.xnnyygn.xraft.core.log.entry.*;
+import xzwraft.core.log.entry.*;
 import xzwraft.core.log.entry.*;
 import xzwraft.core.log.event.GroupConfigEntryBatchRemovedEvent;
 import xzwraft.core.log.event.GroupConfigEntryCommittedEvent;
@@ -14,7 +14,7 @@ import xzwraft.core.node.task.GroupConfigChangeTaskReference;
 import xzwraft.core.node.task.GroupConfigChangeTaskResult;
 import xzwraft.core.rpc.ConnectorAdapter;
 import xzwraft.core.rpc.MockConnector;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import xzwraft.core.rpc.message.*;
 import xzwraft.core.schedule.NullScheduler;
 import xzwraft.core.support.DirectTaskExecutor;

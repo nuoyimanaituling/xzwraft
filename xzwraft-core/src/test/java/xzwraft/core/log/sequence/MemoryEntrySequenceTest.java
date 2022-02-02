@@ -1,6 +1,6 @@
 package xzwraft.core.log.sequence;
 
-import in.xnnyygn.xraft.core.log.entry.*;
+import xzwraft.core.log.entry.*;
 import xzwraft.core.log.entry.*;
 import xzwraft.core.node.NodeEndpoint;
 import xzwraft.core.node.NodeId;

@@ -6,7 +6,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="in.xnnyygn.xraft.core" level="debug"/>
+        <Logger name="xzwraft.core" level="debug"/>
         <Root level="info">
             <AppenderRef ref="STDOUT"/>
         </Root>

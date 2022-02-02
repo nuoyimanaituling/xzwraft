@@ -1,10 +1,10 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
-import in.xnnyygn.xraft.core.service.AddNodeCommand;
-import in.xnnyygn.xraft.core.service.RemoveNodeCommand;
-import in.xnnyygn.xraft.kvstore.message.CommandRequest;
-import in.xnnyygn.xraft.kvstore.message.GetCommand;
-import in.xnnyygn.xraft.kvstore.message.SetCommand;
+import xzwraft.core.service.AddNodeCommand;
+import xzwraft.core.service.RemoveNodeCommand;
+import xzwraft.kvstore.message.CommandRequest;
+import xzwraft.kvstore.message.GetCommand;
+import xzwraft.kvstore.message.SetCommand;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

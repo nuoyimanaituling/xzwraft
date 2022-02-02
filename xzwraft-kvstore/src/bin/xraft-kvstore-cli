@@ -13,4 +13,4 @@ done
 
 ${JAVA_EXECUTABLE} -cp ${CLASS_PATH} \
     -Dlog4j.configurationFile=${BASE_DIR}/conf/log4j2.xml \
-    in.xnnyygn.xraft.kvstore.client.ConsoleLauncher "$@"
+    xzwraft.kvstore.client.ConsoleLauncher "$@"

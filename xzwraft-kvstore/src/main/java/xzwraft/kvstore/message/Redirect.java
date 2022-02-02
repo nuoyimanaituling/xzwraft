@@ -1,6 +1,6 @@
-package in.xnnyygn.xraft.kvstore.message;
+package xzwraft.kvstore.message;
 
-import in.xnnyygn.xraft.core.node.NodeId;
+import xzwraft.core.node.NodeId;
 
 public class Redirect {
 

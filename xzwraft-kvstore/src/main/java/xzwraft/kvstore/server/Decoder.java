@@ -1,13 +1,14 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
-import in.xnnyygn.xraft.core.service.AddNodeCommand;
-import in.xnnyygn.xraft.core.service.RemoveNodeCommand;
-import in.xnnyygn.xraft.kvstore.MessageConstants;
-import in.xnnyygn.xraft.kvstore.Protos;
-import in.xnnyygn.xraft.kvstore.message.*;
+import xzwraft.core.service.AddNodeCommand;
+import xzwraft.core.service.RemoveNodeCommand;
+import xzwraft.kvstore.MessageConstants;
+import xzwraft.kvstore.Protos;
+import xzwraft.kvstore.message.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+import xzwraft.kvstore.message.*;
 
 import java.util.List;
 

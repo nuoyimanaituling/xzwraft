@@ -1,4 +1,4 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
 public class ClientRemoveServerCommand implements Command {
 

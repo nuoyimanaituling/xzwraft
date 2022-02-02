@@ -1,8 +1,8 @@
-package in.xnnyygn.xraft.kvstore.message;
+package xzwraft.kvstore.message;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import in.xnnyygn.xraft.kvstore.Protos;
+import xzwraft.kvstore.Protos;
 
 import java.util.UUID;
 

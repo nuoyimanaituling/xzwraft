@@ -5,7 +5,7 @@ import xzwraft.core.log.entry.Entry;
 import xzwraft.core.log.entry.EntryMeta;
 import xzwraft.core.log.sequence.EntrySequence;
 import xzwraft.core.log.sequence.MemoryEntrySequence;
-import in.xnnyygn.xraft.core.log.snapshot.*;
+import xzwraft.core.log.snapshot.*;
 import xzwraft.core.node.NodeEndpoint;
 import xzwraft.core.rpc.message.InstallSnapshotRpc;
 import org.slf4j.Logger;

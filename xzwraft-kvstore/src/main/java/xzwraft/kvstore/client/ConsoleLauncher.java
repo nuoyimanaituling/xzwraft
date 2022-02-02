@@ -1,7 +1,7 @@
-package in.xnnyygn.xraft.kvstore.client;
+package xzwraft.kvstore.client;
 
-import in.xnnyygn.xraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.Address;
+import xzwraft.core.node.NodeId;
+import xzwraft.core.rpc.Address;
 import org.apache.commons.cli.*;
 
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class ConsoleLauncher {
                 .build());
         if (args.length == 0) {
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("xraft-kvstore-client [OPTION]...", options);
+            formatter.printHelp("xzwraft-kvstore-client [OPTION]...", options);
             return;
         }
 

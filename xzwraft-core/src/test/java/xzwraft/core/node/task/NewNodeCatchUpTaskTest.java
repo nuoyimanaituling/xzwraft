@@ -3,7 +3,7 @@ package xzwraft.core.node.task;
 import xzwraft.core.node.config.NodeConfig;
 import xzwraft.core.node.NodeEndpoint;
 import xzwraft.core.node.NodeId;
-import in.xnnyygn.xraft.core.rpc.message.*;
+import xzwraft.core.rpc.message.*;
 import xzwraft.core.rpc.message.*;
 import xzwraft.core.support.SingleThreadTaskExecutor;
 import xzwraft.core.support.TaskExecutor;

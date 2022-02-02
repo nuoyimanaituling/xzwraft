@@ -1,17 +1,18 @@
-package in.xnnyygn.xraft.kvstore.server;
+package xzwraft.kvstore.server;
 
 import com.google.protobuf.ByteString;
-import in.xnnyygn.xraft.core.log.statemachine.AbstractSingleThreadStateMachine;
-import in.xnnyygn.xraft.core.node.task.GroupConfigChangeTaskReference;
-import in.xnnyygn.xraft.core.node.Node;
-import in.xnnyygn.xraft.core.node.role.RoleName;
-import in.xnnyygn.xraft.core.node.role.RoleNameAndLeaderId;
-import in.xnnyygn.xraft.core.service.AddNodeCommand;
-import in.xnnyygn.xraft.core.service.RemoveNodeCommand;
-import in.xnnyygn.xraft.kvstore.Protos;
-import in.xnnyygn.xraft.kvstore.message.*;
+import xzwraft.core.log.statemachine.AbstractSingleThreadStateMachine;
+import xzwraft.core.node.task.GroupConfigChangeTaskReference;
+import xzwraft.core.node.Node;
+import xzwraft.core.node.role.RoleName;
+import xzwraft.core.node.role.RoleNameAndLeaderId;
+import xzwraft.core.service.AddNodeCommand;
+import xzwraft.core.service.RemoveNodeCommand;
+import xzwraft.kvstore.Protos;
+import xzwraft.kvstore.message.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xzwraft.kvstore.message.*;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
